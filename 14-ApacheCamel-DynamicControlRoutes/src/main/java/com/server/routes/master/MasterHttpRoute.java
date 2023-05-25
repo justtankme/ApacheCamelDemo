@@ -2,6 +2,7 @@ package com.server.routes.master;
 
 import com.server.DynamicControlRoutesMainApp;
 import com.server.dto.PersonDTO;
+import com.server.processor.HttpResponseContentTypeProcessor;
 import com.server.util.CommonUtils;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
@@ -10,6 +11,8 @@ import org.apache.camel.Message;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.RouteConfigurationDefinition;
+import org.apache.camel.model.dataformat.ContentTypeHeaderAware;
+import org.apache.camel.processor.aggregate.StringAggregationStrategy;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -81,11 +84,11 @@ public class MasterHttpRoute extends RouteBuilder {
 
                 if (exchange.getPattern() == ExchangePattern.InOut) {
                     Message outMessage = exchange.getMessage();
-                    outMessage.setBody("received msg " + "-00");
+                    outMessage.setBody("received msg中文 " + "-00");
                 }
             }
-        });
-
+        }).process(new HttpResponseContentTypeProcessor())
+;
     }
 
 }
