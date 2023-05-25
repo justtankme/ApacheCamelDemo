@@ -17,7 +17,7 @@ public class DynamicControlRoutesMainApp {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DynamicControlRoutesMainApp.class);
 
-    private static final String LOGBACK_FILENAME = "./conf/logback.xml";
+    private static final String LOGBACK_FILENAME = "14-ApacheCamel-DynamicControlRoutes/src/main/conf/logback.xml";
 
     public static CamelContext camelContext;
 

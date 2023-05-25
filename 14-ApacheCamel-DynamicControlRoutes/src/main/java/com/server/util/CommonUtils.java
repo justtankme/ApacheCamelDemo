@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Map;
+
 /**
  * @author CYX
  * @date 2018/11/7 14:15
@@ -11,6 +13,7 @@ import org.slf4j.LoggerFactory;
 public class CommonUtils {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CommonUtils.class);
+
 
     /**
      * JSON字符串转换为Java Bean对象
@@ -20,16 +23,14 @@ public class CommonUtils {
      * @param <T>
      * @return
      */
-    public static final <T> T toJavaObject(String json, Class<T> clazz) {
+    public static final <T> T toJavaObject(Map<String, Object> json, Class<T> clazz) {
         try {
-            JSONObject jObject = JSONObject.parseObject(json);
-            return JSONObject.toJavaObject(jObject, clazz);
+            return new JSONObject(json).toJavaObject(clazz);
         } catch (Exception e) {
-            LOGGER.error("json : {} , e : {} , message : {}", new Object[]{json, e, e.getMessage()});
+            LOGGER.error("json : {} , e : {} , message : {}", json, e, e.getMessage());
             return null;
         }
     }
-
     /**
      * Java Bean对象转换为JSON字符串
      *
